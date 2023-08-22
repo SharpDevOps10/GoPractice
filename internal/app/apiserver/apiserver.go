@@ -12,7 +12,6 @@ func New(config *Config) *APIServer {
 	}
 }
 
-// Start ...
 func (s *APIServer) Start() error {
 	return nil
 }
