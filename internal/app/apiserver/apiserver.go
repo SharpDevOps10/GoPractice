@@ -7,14 +7,12 @@ import (
 	"net/http"
 )
 
-// APIServer ...
 type APIServer struct {
 	config *Config
 	logger *logrus.Logger
 	router *mux.Router
 }
 
-// New ...
 func New(config *Config) *APIServer {
 	return &APIServer{
 		config: config,
