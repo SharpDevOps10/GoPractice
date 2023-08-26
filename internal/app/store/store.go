@@ -27,3 +27,10 @@ func (s *Store) Open() error {
 
 	return nil
 }
+
+func (s *Store) Close() {
+	err := s.db.Close()
+	if err != nil {
+		return
+	}
+}
