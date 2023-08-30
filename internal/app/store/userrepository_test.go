@@ -17,3 +17,12 @@ func TestUserRepository_Create(t *testing.T) {
 	assert.NoError(t, err)
 	assert.NotNil(t, u)
 }
+
+func TestUserRepository_FindByEmail(t *testing.T) {
+	s, teardown := store.TestStore(t, databaseURL)
+	defer teardown("userss")
+	email := "bulldog@gmail.com"
+	_, err := s.User().FindByEmail(email)
+	assert.Error(t, err)
+
+}
