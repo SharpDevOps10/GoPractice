@@ -17,3 +17,16 @@ func encryptString(s string) (string, error) {
 
 	return string(b), nil
 }
+
+func (u *User) BeforeCreate() error {
+	if len(u.Password) > 0 {
+		enc, err := encryptString(u.Password)
+		if err != nil {
+			return err
+		}
+
+		u.EncryptedPassword = enc
+	}
+
+	return nil
+}
