@@ -1,12 +1,19 @@
 package model
 
-import "golang.org/x/crypto/bcrypt"
+import (
+	validation "github.com/go-ozzo/ozzo-validation"
+	"golang.org/x/crypto/bcrypt"
+)
 
 type User struct {
 	ID                int
 	Email             string
 	Password          string
 	EncryptedPassword string
+}
+
+func (u *User) Validate() error {
+	return validation.ValidateStruct(u)
 }
 
 func encryptString(s string) (string, error) {
