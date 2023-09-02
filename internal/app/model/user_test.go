@@ -19,6 +19,15 @@ func TestUser_Validate(t *testing.T) {
 			},
 			isValid: true,
 		},
+		{
+			name: "gde email?",
+			u: func() *model.User {
+				u := model.TestUser(t)
+				u.Email = ""
+				return u
+			},
+			isValid: false,
+		},
 	}
 
 	for _, tc := range testCase {
