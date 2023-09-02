@@ -28,6 +28,15 @@ func TestUser_Validate(t *testing.T) {
 			},
 			isValid: false,
 		},
+		{
+			name: "invalid email",
+			u: func() *model.User {
+				u := model.TestUser(t)
+				u.Email = "invalid"
+				return u
+			},
+			isValid: false,
+		},
 	}
 
 	for _, tc := range testCase {
