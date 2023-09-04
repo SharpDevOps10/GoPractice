@@ -1,27 +1,21 @@
-package sqlstore_test
+package teststore_test
 
 import (
 	"github.com/SharpDevOps10/GoPractice/internal/app/model"
-	"github.com/SharpDevOps10/GoPractice/internal/app/store/sqlstore"
+	"github.com/SharpDevOps10/GoPractice/internal/app/store/teststore"
 	"github.com/stretchr/testify/assert"
 	"testing"
 )
 
 func TestUserRepository_Create(t *testing.T) {
-	db, teardown := sqlstore.TestDB(t, databaseURL)
-	defer teardown("userss")
-	s := sqlstore.New(db)
-
+	s := teststore.New()
 	u := model.TestUser(t)
 	assert.NoError(t, s.User().Create(u))
-	assert.NotNil(t, u)
+	assert.NotNil(t, u.ID)
 }
 
 func TestUserRepository_FindByEmail(t *testing.T) {
-	db, teardown := sqlstore.TestDB(t, databaseURL)
-	defer teardown("userss")
-
-	s := sqlstore.New(db)
+	s := teststore.New()
 	email := "bulldog@gmail.com"
 	_, err := s.User().FindByEmail(email)
 	assert.Error(t, err)
@@ -34,5 +28,4 @@ func TestUserRepository_FindByEmail(t *testing.T) {
 	u, err = s.User().FindByEmail(email)
 	assert.NoError(t, err)
 	assert.NotNil(t, u)
-
 }
