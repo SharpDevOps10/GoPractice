@@ -1,4 +1,4 @@
-package store
+package sqlstore
 
 import (
 	"github.com/SharpDevOps10/GoPractice/internal/app/model"
