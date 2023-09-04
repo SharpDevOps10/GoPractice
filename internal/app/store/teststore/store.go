@@ -1,27 +1,16 @@
-package sqlstore
+package teststore
 
 import (
-	"database/sql"
+	"github.com/SharpDevOps10/GoPractice/internal/app/model"
 	"github.com/SharpDevOps10/GoPractice/internal/app/store"
-	_ "github.com/lib/pq"
 )
 
 type Store struct {
-	db             *sql.DB
 	userRepository *UserRepository
 }
 
-func New(db *sql.DB) *Store {
-	return &Store{
-		db: db,
-	}
-}
-
-func (s *Store) Close() {
-	err := s.db.Close()
-	if err != nil {
-		return
-	}
+func New() *Store {
+	return &Store{}
 }
 
 func (s *Store) User() store.UserRepository {
@@ -31,6 +20,7 @@ func (s *Store) User() store.UserRepository {
 
 	s.userRepository = &UserRepository{
 		store: s,
+		users: make(map[string]*model.User),
 	}
 
 	return s.userRepository
