@@ -1,7 +1,7 @@
 package apiserver
 
 import (
-	"github.com/SharpDevOps10/GoPractice/internal/app/store"
+	"github.com/SharpDevOps10/GoPractice/internal/app/store/sqlstore"
 	"github.com/gorilla/mux"
 	"github.com/sirupsen/logrus"
 	"io"
@@ -12,7 +12,7 @@ type APIServer struct {
 	config *Config
 	logger *logrus.Logger
 	router *mux.Router
-	store  *store.Store
+	store  *sqlstore.Store
 }
 
 func New(config *Config) *APIServer {
@@ -62,10 +62,7 @@ func (s *APIServer) handleHello() http.HandlerFunc {
 }
 
 func (s *APIServer) configureStore() error {
-	st := store.New(s.config.Store)
-	if err := st.Open(); err != nil {
-		return err
-	}
+	st := sqlstore.New(s.config.Store)
 
 	s.store = st
 
