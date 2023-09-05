@@ -1,7 +1,9 @@
 package sqlstore
 
 import (
+	"database/sql"
 	"github.com/SharpDevOps10/GoPractice/internal/app/model"
+	"github.com/SharpDevOps10/GoPractice/internal/app/store"
 )
 
 type UserRepository struct {
@@ -34,6 +36,9 @@ func (r *UserRepository) FindByEmail(email string) (*model.User, error) {
 		&u.Email,
 		&u.EncryptedPassword,
 	); err != nil {
+		if err == sql.ErrNoRows {
+			return nil, store.ErrRecordNotFound
+		}
 		return nil, err
 	}
 
