@@ -11,3 +11,6 @@ Dowload **Golang** - https://go.dev/dl/
 
 # Documentation
 If you want to know about **Migrations**, you can follow this link - https://github.com/fictadvisor/fictadvisor-api/wiki/Migration
+
+# Information
+**The book** with information - https://golangify.com/
