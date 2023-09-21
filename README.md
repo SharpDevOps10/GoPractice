@@ -10,8 +10,9 @@ Dowload **Golang** - https://go.dev/dl/
 * **Validation** - https://github.com/go-ozzo/ozzo-validation
 
 # Documentation
-If you want to know about **Migrations**, you can follow this link - https://github.com/fictadvisor/fictadvisor-api/wiki/Migration
+If you want to know about **Migrations**, you can follow this link - [Migrations](https://github.com/fictadvisor/fictadvisor-api/wiki/Migration)
+
+If you want to know about **Merge Conflicts**, you can follow this link - [Merge Conflicts](https://github.com/fictadvisor/fictadvisor-api/wiki/Merge-conflicts#how-to-resolve-merge-conflicts) 
 
 # Information
 **The book** with information - https://golangify.com/
-e
