@@ -8,6 +8,7 @@ Dowload **Golang** - https://go.dev/dl/
 * **Tests**. The assert package provides some helpful methods that allow you to write better test code in Go - https://github.com/stretchr/testify
 * **Go cryptography libraries** - https://github.com/golang/crypto
 * **Validation** - https://github.com/go-ozzo/ozzo-validation
+* **Cookie-sessions** - https://github.com/gorilla/sessions
 
 # Documentation
 If you want to know about **Migrations**, you can follow this link - [Migrations](https://github.com/fictadvisor/fictadvisor-api/wiki/Migration)
