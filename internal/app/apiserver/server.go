@@ -1,6 +1,7 @@
 package apiserver
 
 import (
+	"context"
 	"encoding/json"
 	"errors"
 	"github.com/SharpDevOps10/GoPractice/internal/app/model"
@@ -12,12 +13,16 @@ import (
 )
 
 const (
-	sessionName = "FICTAdvisor"
+	sessionName               = "FICTAdvisor"
+	contextKeyUser contextKey = iota
 )
 
 var (
 	errIncorrectEmailOrPassword = errors.New("incorrect email or password ")
+	errNotAuthenticated         = errors.New("user is not authenticated")
 )
+
+type contextKey int8
 
 type server struct {
 	router       *mux.Router
@@ -78,6 +83,31 @@ func (s *server) handleUsersCreate() http.HandlerFunc {
 
 func (s *server) error(w http.ResponseWriter, r *http.Request, code int, err error) {
 	s.respond(w, r, code, map[string]string{"error": err.Error()})
+
+}
+
+func (s *server) authenticateUser(next http.Handler) http.Handler {
+	return http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
+		session, err := s.sessionStore.Get(r, sessionName)
+		if err != nil {
+			s.error(w, r, http.StatusInternalServerError, err)
+			return
+		}
+
+		id, ok := session.Values["user_id"]
+		if !ok {
+			s.error(w, r, http.StatusUnauthorized, errNotAuthenticated)
+			return
+		}
+
+		u, err := s.store.User().FindById(id.(int))
+		if err != nil {
+			s.error(w, r, http.StatusUnauthorized, errNotAuthenticated)
+			return
+		}
+
+		next.ServeHTTP(w, r.WithContext(context.WithValue(r.Context(), contextKeyUser, u)))
+	})
 
 }
 
