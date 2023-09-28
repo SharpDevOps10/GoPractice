@@ -10,6 +10,7 @@ Dowload **Golang** - https://go.dev/dl/
 * **Validation** - https://github.com/go-ozzo/ozzo-validation
 * **Cookie-sessions** - https://github.com/gorilla/sessions
 * **Gorilla handlers** - https://github.com/gorilla/handlers
+* **UUID** - https://github.com/google/uuid
 
 # Documentation
 If you want to know about **Migrations**, you can follow this link - [Migrations](https://github.com/fictadvisor/fictadvisor-api/wiki/Migration)
