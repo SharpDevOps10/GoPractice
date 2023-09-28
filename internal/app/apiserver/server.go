@@ -6,6 +6,7 @@ import (
 	"errors"
 	"github.com/SharpDevOps10/GoPractice/internal/app/model"
 	"github.com/SharpDevOps10/GoPractice/internal/app/store"
+	"github.com/google/uuid"
 	"github.com/gorilla/handlers"
 	"github.com/gorilla/mux"
 	"github.com/gorilla/sessions"
@@ -16,6 +17,7 @@ import (
 const (
 	sessionName               = "FICTAdvisor"
 	contextKeyUser contextKey = iota
+	contextKeyRequestId
 )
 
 var (
@@ -50,6 +52,7 @@ func (s *server) ServeHTTP(w http.ResponseWriter, r *http.Request) {
 }
 
 func (s *server) configureRouter() {
+	s.router.Use(s.setRequestId)
 	s.router.Use(handlers.CORS(handlers.AllowedOrigins([]string{"*"})))
 	s.router.HandleFunc("/users", s.handleUsersCreate()).Methods("POST")
 	s.router.HandleFunc("/sessions", s.handleSessionsCreate()).Methods("POST")
@@ -89,6 +92,15 @@ func (s *server) handleUsersCreate() http.HandlerFunc {
 
 func (s *server) error(w http.ResponseWriter, r *http.Request, code int, err error) {
 	s.respond(w, r, code, map[string]string{"error": err.Error()})
+
+}
+
+func (s *server) setRequestId(next http.Handler) http.Handler {
+	return http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
+		id := uuid.New().String()
+		w.Header().Set("X-Request-ID", id)
+		next.ServeHTTP(w, r.WithContext(context.WithValue(r.Context(), contextKeyRequestId, id)))
+	})
 
 }
 
