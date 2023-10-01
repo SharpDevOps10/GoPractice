@@ -19,5 +19,7 @@ If you want to know about **Merge Conflicts**, you can follow this link - [Merge
 
 If you want to know about **CORS**, you can follow this link - [CORS](https://developer.mozilla.org/en-US/docs/Web/HTTP/CORS)
 
+If you want to know about **Sessions**, you can follow this link - [Sessions](https://medium.com/@hendelRamzy/how-session-and-cookies-works-640fb3f349d1)
+
 # Information
 **The book** with information - https://golangify.com/
